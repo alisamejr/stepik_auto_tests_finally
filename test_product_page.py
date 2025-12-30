@@ -49,3 +49,19 @@ def test_guest_can_add_shellcoders_handbook_to_basket(browser):
     page.solve_quiz_and_get_code()
     page.should_be_product_added_to_basket()
     page.should_be_basket_total_equals_product_price()
+
+
+def test_guest_shoild_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+
+    page.go_to_login_page()
+    page.should_be_login_link
