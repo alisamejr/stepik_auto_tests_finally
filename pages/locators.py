@@ -13,6 +13,7 @@ class LoginPageLocators:
     REGISTER_EMAIL = (By.CSS_SELECTOR, "#id_registration-email")
     REGISTER_PASSWORD = (By.CSS_SELECTOR, "#id_registration-password1")
     REGISTER_CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#id_registration-password2")
+    REGISTER_BUTTON = (By.CSS_SELECTOR, "#register_form button[type='submit']")
 
 
 class ProductPageLocators:
@@ -29,13 +30,10 @@ class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
     BASKET_LINK = (By.CSS_SELECTOR, "a.btn-default[href*='basket']")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 
-# ИСПРАВЛЕНО: Переименован класс для соответствия импорту
 class BasketPageLocators:
-    # ИСПРАВЛЕНО: Исправлен локатор для сообщения о пустой корзине
     EMPTY_BASKET_MESSAGE = (By.CSS_SELECTOR, "#content_inner p")
-    # ИСПРАВЛЕНО: Добавлен локатор для проверки наличия товаров в корзине
     BASKET_ITEMS = (By.CSS_SELECTOR, ".basket-items")
-    # ИСПРАВЛЕНО: Добавлен локатор для контента корзины
     BASKET_CONTENT = (By.ID, "content_inner")
