@@ -7,14 +7,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from .locators import BasePageLocators
 import math
-import time
 
 
 class BasePage:
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
-        # self.browser.implicitly_wait(timeout)
 
     def open(self):
         self.browser.get(self.url)
@@ -46,8 +44,8 @@ class BasePage:
                 EC.presence_of_element_located((how, what))
             )
         except TimeoutException:
-            return False
-        return True
+            return True  # Элемент не появился - успех
+        return False  # Элемент появился - неудача
 
     def is_disappeared(self, how, what, timeout=4):
         try:
@@ -55,8 +53,8 @@ class BasePage:
                 EC.presence_of_element_located((how, what))
             )
         except TimeoutException:
-            return False
-        return True
+            return False  # Элемент не исчез
+        return True  # Элемент исчез
 
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
@@ -66,3 +64,8 @@ class BasePage:
         assert self.is_element_present(
             *BasePageLocators.LOGIN_LINK
         ), "Login link is not presented"
+
+    # ИСПРАВЛЕНО: Метод для перехода в корзину с правильным названием
+    def go_to_basket_page(self):
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+        basket_link.click()

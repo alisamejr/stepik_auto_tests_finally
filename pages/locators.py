@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class MainPageLocators:
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    pass
 
 
 class LoginPageLocators:
@@ -28,3 +28,14 @@ class ProductPageLocators:
 class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BASKET_LINK = (By.CSS_SELECTOR, "a.btn-default[href*='basket']")
+
+
+# ИСПРАВЛЕНО: Переименован класс для соответствия импорту
+class BasketPageLocators:
+    # ИСПРАВЛЕНО: Исправлен локатор для сообщения о пустой корзине
+    EMPTY_BASKET_MESSAGE = (By.CSS_SELECTOR, "#content_inner p")
+    # ИСПРАВЛЕНО: Добавлен локатор для проверки наличия товаров в корзине
+    BASKET_ITEMS = (By.CSS_SELECTOR, ".basket-items")
+    # ИСПРАВЛЕНО: Добавлен локатор для контента корзины
+    BASKET_CONTENT = (By.ID, "content_inner")
