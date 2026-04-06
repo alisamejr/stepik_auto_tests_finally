@@ -39,6 +39,7 @@ class BasePage:
             print("No second alert presented")
 
     def is_not_element_present(self, how, what, timeout=4):
+        # наличие элемента
         try:
             WebDriverWait(self.browser, timeout).until(
                 EC.presence_of_element_located((how, what))
@@ -48,8 +49,9 @@ class BasePage:
         return False
 
     def is_disappeared(self, how, what, timeout=4):
+        # исчезновение элемента
         try:
-            WebDriverWait(self.browser, timeoutException).until_imeout, 1, Tnot(
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
                 EC.presence_of_element_located((how, what))
             )
         except TimeoutException:
@@ -57,19 +59,23 @@ class BasePage:
         return True
 
     def go_to_login_page(self):
+        # переход на страницу входа
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
     def should_be_login_link(self):
+        # проверка ссылки для входа
         assert self.is_element_present(
             *BasePageLocators.LOGIN_LINK
         ), "Login link is not presented"
 
     def go_to_basket_page(self):
+        # переход в корзину
         basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
         basket_link.click()
 
     def should_be_authorized_user(self):
+        # проверяем авторизацию
         assert self.is_element_present(
             *BasePageLocators.USER_ICON
         ), "User icon is not presented, probably unauthorised user"

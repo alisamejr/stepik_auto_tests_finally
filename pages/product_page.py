@@ -14,6 +14,7 @@ class ProductPage(BasePage):
         add_button.click()
 
     def solve_quiz_and_get_code(self):
+        # получение кода за счет решения задачи
         try:
             WebDriverWait(self.browser, 10).until(EC.alert_is_present())
             alert = self.browser.switch_to.alert
@@ -35,6 +36,7 @@ class ProductPage(BasePage):
             print("No alert presented within 10 seconds")
 
     def should_be_product_added_to_basket(self):
+        # наличие товара в корзине
         assert self.is_element_present(
             *ProductPageLocators.SUCCESS_MESSAGE
         ), "Success message is not presented"
@@ -49,6 +51,7 @@ class ProductPage(BasePage):
         ), f"Product name in message doesn't match. Expected: '{product_name}', got: '{message_product_name}'"
 
     def should_be_basket_total_equals_product_price(self):
+        # проверяем цену
         assert self.is_element_present(
             *ProductPageLocators.BASKET_TOTAL_MESSAGE
         ), "Basket total message is not presented"
@@ -63,21 +66,13 @@ class ProductPage(BasePage):
         ), f"Basket total doesn't match product price. Expected: '{product_price}', got: '{basket_total}'"
 
     def should_not_be_success_message(self):
+        # отсутствие сообщения об усехе
         assert self.is_not_element_present(
             *ProductPageLocators.SUCCESS_MESSAGE
         ), "Success message is presented, but should not be"
 
     def should_be_success_message_disappeared(self):
+        # не исчезло ссобщение об успехе
         assert self.is_disappeared(
             *ProductPageLocators.SUCCESS_MESSAGE
         ), "Success message is not disappesred, but should bel"
-
-    def should_not_be_success_message(self):
-        assert self.is_not_element_present(
-            *ProductPageLocators.SUCCESS_MESSAGE
-        ), "Success message is presented, but should not be"
-
-    def should_be_success_message_disappeared(self):
-        assert self.is_disappeared(
-            *ProductPageLocators.SUCCESS_MESSAGE
-        ), "Success message is not disappeared, but should be"
